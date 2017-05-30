@@ -25,11 +25,11 @@ public class main {
         ASTBuilder builder = new ASTBuilder();
         
         Program prog = builder.visitGoal(parser.goal());
-        //PrettyPrintVisitor visitor = new PrettyPrintVisitor();
-        //prog.accept(visitor);
+        PrettyPrintVisitor visitor = new PrettyPrintVisitor();
+        prog.accept(visitor);
         BuildSymbolTableVisitor visitorB = new BuildSymbolTableVisitor();
         prog.accept(visitorB);
-        //SymbolTable t = visitorB.getSymbolTable();
+        SymbolTable t = visitorB.getSymbolTable();
         prog.accept(new TypeCheckVisitor(visitorB.getSymbolTable()));
 	}
 }
